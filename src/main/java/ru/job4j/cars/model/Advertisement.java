@@ -17,4 +17,28 @@ public class Advertisement {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Author author;
+
+    public static Advertisement of(boolean isSold, Car car, Author author) {
+        Advertisement advertisement = new Advertisement();
+        advertisement.isSold = isSold;
+        advertisement.created = new Date();
+        advertisement.car = car;
+        advertisement.author = author;
+        return advertisement;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @Override
+    public String toString() {
+        return "Advertisement{" +
+                "id=" + id +
+                ", isSold=" + isSold +
+                ", created=" + created +
+                ", car=" + car +
+                ", author=" + author +
+                '}';
+    }
 }

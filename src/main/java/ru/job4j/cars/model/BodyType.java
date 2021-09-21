@@ -10,4 +10,18 @@ public class BodyType {
     private int id;
     @Column(nullable = false)
     private String name;
+
+    public static BodyType of(String name) {
+        BodyType bodyType = new BodyType();
+        bodyType.name = name;
+        return bodyType;
+    }
+
+    @Override
+    public String toString() {
+        return "BodyType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

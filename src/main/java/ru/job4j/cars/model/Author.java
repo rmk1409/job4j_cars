@@ -9,4 +9,18 @@ public class Author {
     private int id;
     @Column(nullable = false)
     private String name;
+
+    public static Author of(String name) {
+        Author author = new Author();
+        author.name = name;
+        return author;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

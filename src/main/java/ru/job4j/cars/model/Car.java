@@ -9,7 +9,6 @@ public class Car {
     private int id;
     @Column(nullable = false)
     private String description;
-    @Column(nullable = false)
     private String photo;
     @ManyToOne()
     @JoinColumn(nullable = false)
@@ -17,4 +16,24 @@ public class Car {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Brand brand;
+
+    public static Car of(String description, String photo, BodyType bodyType, Brand brand) {
+        Car car = new Car();
+        car.description = description;
+        car.photo = photo;
+        car.bodyType = bodyType;
+        car.brand = brand;
+        return car;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", photo='" + photo + '\'' +
+                ", bodyType=" + bodyType +
+                ", brand=" + brand +
+                '}';
+    }
 }
