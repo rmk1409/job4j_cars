@@ -8,8 +8,6 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import ru.job4j.cars.model.*;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 
@@ -36,13 +34,8 @@ public class AdRepository {
     public List<Advertisement> getTodayAdvertisements() {
         return tx(session -> {
             String hql = commonQuery +
-                    "where a.created >= :date";
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.HOUR, -24);
-            Date date = calendar.getTime();
-            return session.createQuery(hql)
-                    .setParameter("date", date)
-                    .list();
+                    "where date(a.created) = current_date";
+            return session.createQuery(hql).list();
         });
     }
 
