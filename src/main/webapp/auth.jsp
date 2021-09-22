@@ -18,11 +18,34 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-    <title>Index</title>
+    <title>Auth</title>
 </head>
 <body>
 <div class="container">
     <c:import url="nav-menu.jsp"/>
+    <div class="row">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Авторизация
+            </div>
+            <div class="card-body">
+                <form action="<%=request.getContextPath()%>/auth.do"
+                      method="post">
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" class="form-control" name="name"
+                               required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <c:if test="${not empty error}">
+                        <div style="color:red; font-weight: bold; margin: 30px 0;">
+                            <c:out value="${error}"/>
+                        </div>
+                    </c:if>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

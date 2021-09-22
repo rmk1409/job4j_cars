@@ -18,11 +18,34 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-    <title>Index</title>
+    <title> Add photo </title>
 </head>
 <body>
+
 <div class="container">
     <c:import url="nav-menu.jsp"/>
+    <div class="row">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Добавить фото
+            </div>
+            <div class="card-body">
+                <form action="<c:url value='/upload?id=${param.id}'/>"
+                      method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <div>
+                            <label for="photo-input">Add photo</label>
+                        </div>
+                        <div>
+                            <input id="photo-input" type="file" name="photo">
+                        </div>
+                    </div>
+                    <button id="add-ad-button" class="btn btn-primary">Add
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

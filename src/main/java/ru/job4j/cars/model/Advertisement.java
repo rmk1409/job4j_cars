@@ -1,6 +1,5 @@
 package ru.job4j.cars.model;
 
-import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -29,6 +28,30 @@ public class Advertisement {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setSold(boolean sold) {
+        isSold = sold;
+    }
+
+    public boolean getIsSold() {
+        return isSold;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public Author getAuthor() {
+        return author;
     }
 
     @Override

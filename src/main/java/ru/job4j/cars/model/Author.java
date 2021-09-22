@@ -1,7 +1,5 @@
 package ru.job4j.cars.model;
 
-import javax.persistence.*;
-
 @Entity
 public class Author {
     @Id
@@ -14,6 +12,14 @@ public class Author {
         Author author = new Author();
         author.name = name;
         return author;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

@@ -6,8 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import ru.job4j.cars.model.Advertisement;
-import ru.job4j.cars.model.Brand;
+import ru.job4j.cars.model.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -66,6 +65,30 @@ public class AdRepository {
         });
     }
 
+    public List<Advertisement> getAllAdvertisements() {
+        return tx(session -> session.createQuery(commonQuery).list());
+    }
+
+    public void changeSold(int id) {
+        tx(session -> {
+            Advertisement ad = session.load(Advertisement.class, id);
+            ad.setSold(!ad.getIsSold());
+            return session.save(ad);
+        });
+    }
+
+    public Author findUserByName(String name) {
+        return tx(session ->
+                session.createQuery("from Author where name = :name", Author.class)
+                        .setParameter("name", name)
+                        .uniqueResult()
+        );
+    }
+
+    public void save(Author author) {
+        tx(session -> session.save(author));
+    }
+
     private <T> T tx(final Function<Session, T> command) {
         final Session session = factory.openSession();
         final Transaction tx = session.beginTransaction();
@@ -79,6 +102,26 @@ public class AdRepository {
         } finally {
             session.close();
         }
+    }
+
+    public List<Brand> getAllBrands() {
+        return tx(session -> session.createQuery("from Brand ").list());
+    }
+
+    public List<BodyType> getAllBodyTypes() {
+        return tx(session -> session.createQuery("from BodyType ").list());
+    }
+
+    public void saveAdvertisement(String description, int brandId, int bodyTypeId, int authorId) {
+        tx(session -> {
+            Brand brand = session.load(Brand.class, brandId);
+            BodyType bodyType = session.load(BodyType.class, bodyTypeId);
+            Author author = session.load(Author.class, authorId);
+            Car car = Car.of(description, bodyType, brand);
+            session.save(car);
+            Advertisement advertisement = Advertisement.of(false, car, author);
+            return session.save(advertisement);
+        });
     }
 
     private static class Holder {

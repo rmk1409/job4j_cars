@@ -1,7 +1,5 @@
 package ru.job4j.cars.model;
 
-import javax.persistence.*;
-
 @Entity
 public class Car {
     @Id
@@ -9,7 +7,6 @@ public class Car {
     private int id;
     @Column(nullable = false)
     private String description;
-    private String photo;
     @ManyToOne()
     @JoinColumn(nullable = false)
     private BodyType bodyType;
@@ -17,13 +14,28 @@ public class Car {
     @JoinColumn(nullable = false)
     private Brand brand;
 
-    public static Car of(String description, String photo, BodyType bodyType, Brand brand) {
+    public static Car of(String description, BodyType bodyType, Brand brand) {
         Car car = new Car();
         car.description = description;
-        car.photo = photo;
         car.bodyType = bodyType;
         car.brand = brand;
         return car;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public BodyType getBodyType() {
+        return bodyType;
+    }
+
+    public Brand getBrand() {
+        return brand;
     }
 
     @Override
@@ -31,7 +43,6 @@ public class Car {
         return "Car{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", photo='" + photo + '\'' +
                 ", bodyType=" + bodyType +
                 ", brand=" + brand +
                 '}';

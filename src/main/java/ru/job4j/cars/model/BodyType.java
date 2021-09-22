@@ -1,7 +1,5 @@
 package ru.job4j.cars.model;
 
-import javax.persistence.*;
-
 @Entity
 @Table(name = "body_type")
 public class BodyType {
@@ -15,6 +13,14 @@ public class BodyType {
         BodyType bodyType = new BodyType();
         bodyType.name = name;
         return bodyType;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

@@ -1,7 +1,5 @@
 package ru.job4j.cars.model;
 
-import javax.persistence.*;
-
 @Entity
 public class Brand {
     @Id
@@ -20,6 +18,14 @@ public class Brand {
         Brand brand = new Brand();
         brand.name = name;
         return brand;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
