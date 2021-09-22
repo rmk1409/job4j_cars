@@ -1,5 +1,7 @@
 package ru.job4j.cars.model;
 
+import javax.persistence.*;
+
 @Entity
 @Table(name = "body_type")
 public class BodyType {

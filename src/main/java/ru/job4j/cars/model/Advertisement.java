@@ -1,5 +1,6 @@
 package ru.job4j.cars.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity

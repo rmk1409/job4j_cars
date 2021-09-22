@@ -1,5 +1,7 @@
 package ru.job4j.cars.model;
 
+import javax.persistence.*;
+
 @Entity
 public class Car {
     @Id
@@ -7,7 +9,7 @@ public class Car {
     private int id;
     @Column(nullable = false)
     private String description;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(nullable = false)
     private BodyType bodyType;
     @ManyToOne
