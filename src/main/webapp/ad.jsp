@@ -84,7 +84,7 @@
     $('#ad-table').on('change', (evt) => {
         $.ajax({
             type: 'POST',
-            url: `http://localhost:8080/job4j_cars/change_sold`,
+            url: `/job4j_cars/change-sold`,
             data: {id: evt.target.dataset.id}
         });
     })

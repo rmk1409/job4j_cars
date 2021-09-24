@@ -25,19 +25,18 @@ public class UploadServlet extends HttpServlet {
         factory.setRepository(repository);
         ServletFileUpload upload = new ServletFileUpload(factory);
         try {
-            List<FileItem> items = upload.parseRequest(req);
+            List<FileItem> files = upload.parseRequest(req);
             String path = "/home/rmk/images";
             File folder = new File(path);
             if (!folder.exists()) {
                 folder.mkdir();
             }
-            for (FileItem item : items) {
-                if (!item.isFormField()) {
-                    String pathname = folder + File.separator + req.getParameter("id") + ".jpg";
-                    File file = new File(pathname);
-                    try (FileOutputStream out = new FileOutputStream(file)) {
-                        out.write(item.getInputStream().readAllBytes());
-                    }
+            FileItem imgFile = files.get(0);
+            if (!imgFile.isFormField()) {
+                String pathname = folder + File.separator + req.getParameter("id") + ".jpg";
+                File file = new File(pathname);
+                try (FileOutputStream out = new FileOutputStream(file)) {
+                    out.write(imgFile.getInputStream().readAllBytes());
                 }
             }
         } catch (FileUploadException e) {

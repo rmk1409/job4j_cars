@@ -14,13 +14,7 @@ public class DownloadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter("name").concat(".jpg");
         String path = "/home/rmk/images";
-        File downloadFile = null;
-        for (File file : new File(path).listFiles()) {
-            if (name.equals(file.getName())) {
-                downloadFile = file;
-                break;
-            }
-        }
+        File downloadFile = new File(path + File.separator + name);
         resp.setContentType("application/octet-stream");
         resp.setHeader("Content-Disposition", "attachment; filename=\"" + downloadFile.getName() + "\"");
         try (FileInputStream stream = new FileInputStream(downloadFile)) {
